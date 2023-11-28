@@ -2,12 +2,23 @@ from flask import Flask, render_template, request
 from datetime import datetime
 import os
 import threading
-from eye_tracker import track_eyes  # Import the track_eyes function
+import mouse  # Import the mouse package
+# from eye_tracker import track_eyes  # Import the track_eyes function
 
 app = Flask(__name__, template_folder='templates')
 
-# Variable to control the eye tracking loop
-tracking = False
+
+# # Variable to control the eye tracking loop
+# tracking = False
+
+
+# Function to track mouse movements
+def track_mouse(tracking):
+    while tracking:
+        position = mouse.get_position()
+        with open('data/mousetracking/mouse_data.txt', 'a') as f:
+            f.write(f'Mouse position: {position}\n')
+
 
 @app.route('/')
 def pdf_viewer():
@@ -27,6 +38,7 @@ def stop_tracking():
     tracking = False
     return {'status': 'success'}, 200
 
+
 @app.route('/time_spent', methods=['POST'])
 def time_spent():
     duration = request.form.get('duration')
@@ -36,6 +48,23 @@ def time_spent():
         f.write(f'Window was opened at: {open_time}, Duration: {duration}\n')
 
     return {'status': 'success'}, 200
+
+
+# @app.route('/mouse_data', methods=['POST'])
+# def mouse_data():
+#     posX = request.form.get('posX')
+#     posY = request.form.get('posY')
+#     timestamp = request.form.get('timestamp')
+#     print('Mouse position: ', posX, posY)
+
+#     # Write the mouse coordinates to a text file
+#     with open('data/mouse/mouse_data.txt', 'a') as f:
+#         f.write(f'Timestamp: {timestamp}, Mouse position: {posX}, {posY}\n')
+
+#     return {'status': 'success'}, 200
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)

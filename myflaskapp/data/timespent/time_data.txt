@@ -1,1 +1,6 @@
 Window was opened at: 2023-11-26 16:04:07, Duration: 9178
+Window was opened at: 2023-11-28 09:27:23, Duration: 9387
+Window was opened at: 2023-11-28 09:35:13, Duration: 10220
+Window was opened at: 2023-11-28 09:36:28, Duration: 12271
+Window was opened at: 2023-11-28 09:41:32, Duration: 7920
+Window was opened at: 2023-11-28 09:43:58, Duration: 53324
