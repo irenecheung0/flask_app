@@ -4,3 +4,13 @@ Window was opened at: 2023-11-28 09:35:13, Duration: 10220
 Window was opened at: 2023-11-28 09:36:28, Duration: 12271
 Window was opened at: 2023-11-28 09:41:32, Duration: 7920
 Window was opened at: 2023-11-28 09:43:58, Duration: 53324
+Window was opened at: 2023-11-30 15:46:02, Duration: 278838
+Window was opened at: 2023-11-30 15:46:02, Duration: 490
+Window was opened at: 2023-11-30 15:46:02, Duration: 149
+Window was opened at: 2023-11-30 15:46:02, Duration: 171
+Window was opened at: 2023-11-30 15:46:03, Duration: 955
+Window was opened at: 2023-11-30 15:46:06, Duration: 2549
+Window was opened at: 2023-11-30 16:28:57, Duration: 3548
+Window was opened at: 2023-11-30 16:28:59, Duration: 1401
+Window was opened at: 2023-11-30 16:30:16, Duration: 2183
+Window was opened at: 2023-11-30 16:48:54, Duration: 2934

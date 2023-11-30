@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 from datetime import datetime
 import os
 import threading
-import mouse  # Import the mouse package
+#import mouse  # Import the mouse package
 # from eye_tracker import track_eyes  # Import the track_eyes function
 
 app = Flask(__name__, template_folder='templates')
@@ -12,17 +12,28 @@ app = Flask(__name__, template_folder='templates')
 # tracking = False
 
 
-# Function to track mouse movements
-def track_mouse(tracking):
-    while tracking:
-        position = mouse.get_position()
-        with open('data/mousetracking/mouse_data.txt', 'a') as f:
-            f.write(f'Mouse position: {position}\n')
+# # Function to track mouse movements
+# def track_mouse(tracking):
+#     while tracking:
+#         position = mouse.get_position()
+#         with open('data/mousetracking/mouse_data.txt', 'a') as f:
+#             f.write(f'Mouse position: {position}\n')
 
+
+
+# @app.route('/')
+# def list_viewer():
+#     return render_template('list_view.html')
 
 @app.route('/')
-def pdf_viewer():
-    return render_template('pdf_viewer.html')
+def list_viewer():
+    return render_template('list_view.html')
+
+
+@app.route('/my_pdf')
+def my_pdf():
+    return render_template('/my_pdf/my_pdf_viewer.html')
+
 
 @app.route('/start_tracking', methods=['POST'])
 def start_tracking():

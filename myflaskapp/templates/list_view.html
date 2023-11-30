@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple LMS Frontend</title>
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        html, body {
+            height: 100%; /* Make the html and body elements fill the height of the viewport */
+        }
+        .sidebar, .right-sidebar {
+            height: 100%; /* Make the sidebars fill the height of their parent */
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container-fluid h-100"> <!-- Make the container fill the height of the viewport -->
+        <div class="row h-100"> <!-- Make the row fill the height of the container -->
+            <!-- Left Sidebar -->
+            <div class="col-1 bg-danger text-white d-flex flex-column ">
+               <!-- <img src="icon.png" alt="Icon" class="img-fluid"> -->
+                <img src="{{url_for('static', filename='icon.png')}}" />
+                <a href="#" class="d-block py-2 text-white">Dashboard</a>
+                <a href="#" class="d-block py-2 text-white">Courses</a>
+                <a href="#" class="d-block py-2 text-white">Calendar</a>
+                <a href="#" class="d-block py-2 text-white">Inbox</a>
+                <a href="#" class="d-block py-2 text-white">Account</a>
+            </div>
+            <!-- Right Sidebar 
+            <div class="col-1 bg-white">
+                <button class="btn btn-link text-primary d-block py-2">Home</button>
+                <button class="btn btn-link text-primary d-block py-2">Grades</button>
+                <button class="btn btn-link text-primary d-block py-2">People</button>
+                <button class="btn btn-link text-primary d-block py-2">Files</button>
+            </div>
+        -->
+            <!-- Main Content -->
+            <div class="col-10 p-3">
+                <div class="title-bar">
+                    <h1>Demo LMS</h1>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Date Created</th>
+                            <th scope="col">Date Modified</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <table class="table">
+                        <!-- Rows for files and folders go here -->
+                    <tbody>
+                        <a href="{{ url_for('my_pdf') }}">Sample pdf</a>
+                       
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- Add Bootstrap JS and its dependencies -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
