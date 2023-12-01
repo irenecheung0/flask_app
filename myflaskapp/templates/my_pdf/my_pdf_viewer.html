@@ -10,11 +10,31 @@
     </style>
 </head>
 <body>
+    
+
     <embed class="pdf-viewer" src="{{ url_for('static', filename='sample_pdf.pdf') }}" type="application/pdf">
+    
+        <!-- <script>
+            var x, y;
+            document.onmousemove = function(e){
+                x = e.pageX;
+                y = e.pageY;
+            }
+        
+            setInterval(function(){
+                fetch('/mouse_move', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({x: x, y: y}),
+                })
+            }, 5000);  // Track every 5 seconds
+        </script> -->
+
+
 </body>
 </html>
-
-
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -22,19 +42,19 @@
 $(document).ready(function(){
     var openTime = new Date();
     // Send a request to start eye tracking
-    $.post("{{ url_for('start_tracking') }}", function(data, status){
-        console.log("Data: " + data + "\nStatus: " + status);
-    });
+    // $.post("{{ url_for('start_tracking') }}", function(data, status){
+    //     console.log("Data: " + data + "\nStatus: " + status);
+    // });
     $(window).on('beforeunload', function(){
         var closeTime = new Date();
         var duration = closeTime - openTime;
         $.post("{{ url_for('time_spent') }}", {duration: duration}, function(data, status){
             console.log("Data: " + data + "\nStatus: " + status);
         });
-        // Send a request to stop eye tracking
-        $.post("{{ url_for('stop_tracking') }}", function(data, status){
-            console.log("Data: " + data + "\nStatus: " + status);
-        });
+        // // Send a request to stop eye tracking
+        // $.post("{{ url_for('stop_tracking') }}", function(data, status){
+        //     console.log("Data: " + data + "\nStatus: " + status);
+        // });
     });
 });
 </script>

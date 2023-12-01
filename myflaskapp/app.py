@@ -2,53 +2,70 @@ from flask import Flask, render_template, request
 from datetime import datetime
 import os
 import threading
-#import mouse  # Import the mouse package
-# from eye_tracker import track_eyes  # Import the track_eyes function
+import time
+import pyautogui
+import atexit
 
 app = Flask(__name__, template_folder='templates')
 
+# Global variables
+mouse_coordinates = []
+tracking_active = False
 
-# # Variable to control the eye tracking loop
-# tracking = False
+# Function to track mouse coordinates
+def track_mouse():
+    global mouse_coordinates, tracking_active
+    while tracking_active:
+        # Get mouse coordinates using pyautogui
+        x, y = pyautogui.position()
+        
+        # Append the coordinates with timestamp to the list
+        timestamp = time.time()
+        mouse_coordinates.append((timestamp, x, y))
+        
+        # Sleep for 5 seconds
+        time.sleep(5)
+
+# Start tracking mouse coordinates in a separate thread
+def start_mouse_tracking():
+    global tracking_active
+    tracking_active = True
+    mouse_tracking_thread = threading.Thread(target=track_mouse)
+    mouse_tracking_thread.start()
+
+# Stop tracking mouse coordinates
+def stop_mouse_tracking():
+    global tracking_active
+    tracking_active = False
 
 
-# # Function to track mouse movements
-# def track_mouse(tracking):
-#     while tracking:
-#         position = mouse.get_position()
-#         with open('data/mousetracking/mouse_data.txt', 'a') as f:
-#             f.write(f'Mouse position: {position}\n')
+# Save mouse coordinates to a text file
+def save_mouse_coordinates():
+    file_path = 'data/mousetracking/mouse_data.txt'  # Replace with your desired file path
+    with open(file_path, 'w') as f:
+        for timestamp, x, y in mouse_coordinates:
+            f.write(f'{timestamp},{x},{y}\n')
 
-
-
-# @app.route('/')
-# def list_viewer():
-#     return render_template('list_view.html')
 
 @app.route('/')
 def list_viewer():
     return render_template('list_view.html')
 
-
 @app.route('/my_pdf')
 def my_pdf():
+    start_mouse_tracking()
     return render_template('/my_pdf/my_pdf_viewer.html')
+
+
 
 
 @app.route('/start_tracking', methods=['POST'])
 def start_tracking():
     global tracking
     tracking = True
-    # Start the eye tracking in a separate thread
-    threading.Thread(target=track_eyes, args=(tracking,)).start()
+    # Start the mouse tracking in a separate thread
+    threading.Thread(target=track_mouse, args=(tracking,)).start()
     return {'status': 'success'}, 200
-
-@app.route('/stop_tracking', methods=['POST'])
-def stop_tracking():
-    global tracking
-    tracking = False
-    return {'status': 'success'}, 200
-
 
 @app.route('/time_spent', methods=['POST'])
 def time_spent():
@@ -60,19 +77,16 @@ def time_spent():
 
     return {'status': 'success'}, 200
 
+# Route to stop mouse tracking
+@app.route('/stop_tracking', methods=['POST'])
+def stop_tracking():
+    # Stop tracking mouse coordinates
+    stop_mouse_tracking()
+    return redirect('/')
 
-# @app.route('/mouse_data', methods=['POST'])
-# def mouse_data():
-#     posX = request.form.get('posX')
-#     posY = request.form.get('posY')
-#     timestamp = request.form.get('timestamp')
-#     print('Mouse position: ', posX, posY)
+# Register function to save coordinates when the app exits
+atexit.register(save_mouse_coordinates)
 
-#     # Write the mouse coordinates to a text file
-#     with open('data/mouse/mouse_data.txt', 'a') as f:
-#         f.write(f'Timestamp: {timestamp}, Mouse position: {posX}, {posY}\n')
-
-#     return {'status': 'success'}, 200
 
 
 

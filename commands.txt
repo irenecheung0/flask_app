@@ -1,5 +1,6 @@
 1) activate venv
 source myenv/bin/activate
+venv\Scripts\Activate.ps1
 
 2) Set env variable
 For the Session: You can set an environment variable in the terminal for the duration of a session. Open Terminal and type:
