@@ -95,12 +95,13 @@ def list_viewer():
 @app.route('/my_pdf')
 def my_pdf():
     start_eye_tracking()
+    start_mouse_tracking()
     return render_template('/my_pdf/my_pdf_viewer.html')
 
 @app.route('/start_tracking', methods=['POST'])
 def start_tracking():
-    start_mouse_tracking()
-    start_eye_tracking()
+    #start_mouse_tracking()
+    #start_eye_tracking()
     return {'status': 'success'}, 200
 
 @app.route('/time_spent', methods=['POST'])

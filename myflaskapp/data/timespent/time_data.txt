@@ -26,3 +26,7 @@ Window was opened at: 2023-12-01 09:47:45, Duration: 18993
 Window was opened at: 2023-12-01 10:07:13, Duration: 18343
 Window was opened at: 2023-12-01 10:09:16, Duration: 17759
 Window was opened at: 2023-12-28 11:25:09, Duration: 14488
+Window was opened at: 2024-02-11 19:50:52, Duration: 14829
+Window was opened at: 2024-02-11 19:53:02, Duration: 18304
+Window was opened at: 2024-02-11 19:55:58, Duration: 8666
+Window was opened at: 2024-02-11 19:57:23, Duration: 12093
